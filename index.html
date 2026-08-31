@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Una carta hecha con cariño, solo para ti" />
   <title>Para ti, con todo mi amor ❤️</title>
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>" />
 
-  <meta property="og:title" content="Para ti mi lau, con todo mi amor ❤️" />
+  <meta property="og:title" content="Para ti, con todo mi amor ❤️" />
   <meta property="og:description" content="Toca para abrir tu carta de cumpleaños" />
   <meta property="og:image" content="https://felicitaciones-sigma.vercel.app/preview.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://felicitaciones-sigma.vercel.app/" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Para ti mi lau, con todo mi amor ❤️" />
+  <meta name="twitter:title" content="Para ti, con todo mi amor ❤️" />
   <meta name="twitter:description" content="Toca para abrir tu carta de cumpleaños" />
   <meta name="twitter:image" content="https://felicitaciones-sigma.vercel.app/preview.jpg" />
 
@@ -28,10 +29,8 @@
   <div class="dust" id="dust"></div>
 
   <main class="stage">
-    <!-- Tarjeta cerrada -->
     <button class="card" id="card" type="button" aria-label="Abrir carta">
       <div class="card-face">
-        <div class="grain"></div>
         <p class="card-for">Para</p>
         <p class="card-name">Mi amor</p>
         <div class="card-seal"><span>♥</span></div>
@@ -39,42 +38,54 @@
       </div>
     </button>
 
-    <!-- Carta abierta -->
     <article class="letter" id="letter" aria-hidden="true">
       <div class="letter-sheet">
-        <div class="grain"></div>
-
-        <p class="letter-mark">✦</p>
-        <h1 class="letter-title">Feliz cumpleaños amor</h1>
-        <p class="letter-sub">mi persona favorita</p>
-        <div class="letter-line"></div>
+        <p class="letter-mark reveal" data-delay="0">✦</p>
+        <h1 class="letter-title reveal" data-delay="1">Feliz cumpleaños</h1>
+        <p class="letter-sub reveal" data-delay="2">mi persona favorita</p>
+        <div class="letter-line reveal" data-delay="3"></div>
 
         <div class="letter-text">
-          <p>
+          <p class="reveal" data-delay="4">
             Hoy cumple años una persona
             a la que quiero muchísimo.
             Sí, tú, mi amor.
           </p>
-          <p>
+          <p class="reveal" data-delay="5">
             Gracias por existir en mi vida,
             por nuestras conversaciones y por esa confianza
             de poder decirnos “mi cielo” sin pensarlo dos veces.
           </p>
-          <p>
+          <p class="reveal" data-delay="6">
             Espero que este nuevo año te regale
             tantos motivos para sonreír como tú le das
             a las personas que tienen la suerte de conocerte.
           </p>
-          <p class="letter-end">
+          <p class="letter-end reveal" data-delay="7">
             Te quiero mucho.<br />
             Feliz cumpleaños, mi vida. 🤍
           </p>
         </div>
 
-        <footer class="letter-foot">
-          <p class="foot-from">De alguien que te quiere muchísimo, </p>
+        <footer class="letter-foot reveal" data-delay="8">
+          <p class="foot-from">De alguien que te quiere muchísimo,</p>
           <p class="foot-name">Miguel 🤍</p>
         </footer>
+
+        <div class="letter-close reveal" data-delay="9" id="secretTrigger" role="button" tabindex="0" aria-label="Hay algo más">
+          <span class="close-heart">♥</span>
+          <p class="close-hint">Toca el corazón</p>
+        </div>
+
+        <div class="secret" id="secret" aria-hidden="true">
+          <p class="secret-text">
+            Y si algún día lo dudas… sigue siendo tú
+            la persona favorita de mi historia.
+          </p>
+          <figure class="secret-photo">
+            <img src="foto.jpg" alt="Nosotros" id="secretImg" />
+          </figure>
+        </div>
       </div>
     </article>
   </main>
