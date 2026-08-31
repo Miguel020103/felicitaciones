@@ -4,9 +4,13 @@ const dust = document.getElementById('dust');
 const musicBtn = document.getElementById('musicBtn');
 const musicIcon = document.getElementById('musicIcon');
 const bgMusic = document.getElementById('bgMusic');
+const secretTrigger = document.getElementById('secretTrigger');
+const secret = document.getElementById('secret');
+const secretImg = document.getElementById('secretImg');
 
 let open = false;
 let playing = false;
+let secretOpen = false;
 
 card.addEventListener('click', reveal);
 
@@ -21,9 +25,37 @@ function reveal() {
     letter.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-open');
     tryMusic();
-    drift(14);
-    setTimeout(() => drift(10), 3500);
+    drift(12);
+
+    const parts = letter.querySelectorAll('.reveal');
+    parts.forEach((el) => {
+      const delay = Number(el.dataset.delay || 0);
+      setTimeout(() => el.classList.add('show'), 280 + delay * 420);
+    });
   }, 420);
+}
+
+function openSecret() {
+  if (!open || secretOpen) return;
+  secretOpen = true;
+  secretTrigger.classList.add('opened');
+  secret.classList.add('show');
+  secret.setAttribute('aria-hidden', 'false');
+  drift(8);
+}
+
+secretTrigger.addEventListener('click', openSecret);
+secretTrigger.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openSecret();
+  }
+});
+
+if (secretImg) {
+  secretImg.addEventListener('error', () => {
+    secretImg.style.display = 'none';
+  });
 }
 
 function drift(n) {
