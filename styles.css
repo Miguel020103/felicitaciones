@@ -77,7 +77,7 @@ body.is-open {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +86,7 @@ body.is-open {
 
 .card {
   position: relative;
-  width: 260px;
+  width: 300px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -113,12 +113,14 @@ body.is-open {
 .card-face {
   position: relative;
   background: linear-gradient(160deg, #f5ebe2 0%, #e9d8cb 100%);
-  border-radius: 4px;
-  padding: 48px 28px 36px;
+  border-radius: 6px;
+  padding: 56px 36px 44px;
   text-align: center;
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.45),
-    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 22px 48px rgba(0, 0, 0, 0.5),
+    0 8px 18px rgba(0, 0, 0, 0.28),
+    6px 6px 0 rgba(210, 185, 165, 0.55),
+    12px 12px 0 rgba(190, 160, 140, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.45);
   overflow: hidden;
 }
@@ -186,7 +188,7 @@ body.is-open {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 320px;
+  width: 360px;
   max-width: 90vw;
   transform: translate(-50%, -50%) scale(0.88);
   opacity: 0;
@@ -214,11 +216,13 @@ body.is-open .letter {
 .letter-sheet {
   position: relative;
   background: linear-gradient(170deg, #faf5f0 0%, #f2e8de 100%);
-  border-radius: 3px;
-  padding: 40px 34px 34px;
+  border-radius: 5px;
+  padding: 48px 42px 42px;
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.42),
+    0 28px 56px rgba(0, 0, 0, 0.48),
     0 0 0 1px rgba(170, 130, 100, 0.12),
+    7px 7px 0 rgba(220, 200, 180, 0.5),
+    14px 14px 0 rgba(200, 175, 155, 0.22),
     inset 0 0 50px rgba(255, 252, 248, 0.4);
   overflow: hidden;
 }
@@ -344,17 +348,17 @@ body.is-open .letter {
 }
 
 @media (max-width: 480px) {
-  .card { width: 240px; }
-  .card-face { padding: 42px 24px 32px; }
+  .card { width: 280px; }
+  .card-face { padding: 50px 30px 40px; }
   .card-name { font-size: 2.15rem; }
-  .letter { width: 300px; }
-  .letter-sheet { padding: 34px 26px 28px; }
+  .letter { width: 330px; }
+  .letter-sheet { padding: 42px 32px 36px; }
   .letter-title { font-size: 2rem; }
   .letter-text { font-size: 0.98rem; }
 }
 
 @media (max-height: 700px) {
-  .letter-sheet { padding: 30px 26px 24px; }
+  .letter-sheet { padding: 36px 30px 30px; }
   .letter-title { font-size: 1.95rem; }
   .letter-text p { margin-bottom: 11px; }
 }
