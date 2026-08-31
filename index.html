@@ -6,7 +6,6 @@
   <meta name="description" content="Una carta especial de cumpleaños para ti" />
   <title>Para ti, con todo mi amor ❤️</title>
 
-  <!-- Vista previa cuando se comparte el link -->
   <meta property="og:title" content="Para ti, con todo mi amor ❤️" />
   <meta property="og:description" content="Toca para abrir tu carta de cumpleaños" />
   <meta property="og:image" content="preview.jpg" />
@@ -26,44 +25,39 @@
   <div class="bg-glow"></div>
   <div class="petals-container" id="petals"></div>
 
-  <!-- ===================== SOBRE ===================== -->
   <div class="scene" id="scene">
     <div class="envelope" id="envelope">
-      <!-- Cara frontal del sobre -->
       <div class="envelope-front">
         <div class="envelope-texture"></div>
 
-        <!-- Dirección / etiqueta -->
         <div class="address">
           <span class="to-label">Para:</span>
           <span class="to-name">Mi amor</span>
           <span class="from-label">Con todo el cariño del mundo</span>
         </div>
 
-        <!-- Esquinas decorativas -->
+        <!-- Sello abajo, en la cara frontal -->
+        <div class="wax-seal">
+          <div class="seal-inner">❤️</div>
+        </div>
+
         <div class="corner corner-tl"></div>
         <div class="corner corner-tr"></div>
         <div class="corner corner-bl"></div>
         <div class="corner corner-br"></div>
       </div>
 
-      <!-- Solapa superior. El sello va como hermano del triángulo para no ser recortado por el clip-path -->
+      <!-- Solo la solapa (triángulo) -->
       <div class="envelope-flap" id="flap">
         <div class="flap-inner"></div>
-        <!-- Sello de cera que voltea junto con la solapa -->
-        <div class="wax-seal">
-          <div class="seal-inner">❤️</div>
-        </div>
       </div>
 
-      <!-- Indicación -->
       <div class="click-hint" id="hint">
         <span>Toca el sobre para abrirlo</span>
         <div class="hint-arrow">↓</div>
       </div>
     </div>
 
-    <!-- ===================== CARTA ===================== -->
     <div class="letter" id="letter">
       <div class="letter-paper">
         <div class="letter-header">
@@ -112,12 +106,10 @@
     </div>
   </div>
 
-  <!-- Botón de música -->
   <button class="music-btn" id="musicBtn" aria-label="Música" title="Activar / pausar música">
     <span id="musicIcon">🎵</span>
   </button>
 
-  <!-- Audio -->
   <audio id="bgMusic" loop preload="auto">
     <source src="romantica.mp3" type="audio/mpeg" />
   </audio>
