@@ -19,6 +19,7 @@ html, body {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg);
   color: var(--ink);
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -34,7 +35,7 @@ body.is-open {
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-start;
-  padding: 48px 20px 100px;
+  padding: 28px 16px 96px;
 }
 
 .ambient {
@@ -81,9 +82,10 @@ body.is-open {
   min-height: 280px;
 }
 
+/* ========== Tarjeta cerrada ========== */
 .card {
   position: relative;
-  width: 300px;
+  width: min(300px, 86vw);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -168,12 +170,12 @@ body.is-open {
   50% { opacity: 0.75; }
 }
 
+/* ========== Carta abierta ========== */
 .letter {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 400px;
-  max-width: 92vw;
+  width: min(400px, 92vw);
   transform: translate(-50%, -50%) scale(0.9);
   opacity: 0;
   pointer-events: none;
@@ -195,6 +197,7 @@ body.is-open .letter {
   left: auto;
   transform: none;
   margin: 0 auto;
+  width: min(400px, 100%);
 }
 
 .letter-sheet {
@@ -264,7 +267,7 @@ body.is-open .letter {
 }
 
 .letter-text p {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .letter-text p:last-child {
@@ -355,7 +358,7 @@ body.is-open .letter {
 }
 
 .secret.show {
-  max-height: 480px;
+  max-height: 520px;
   opacity: 1;
   margin-top: 18px;
 }
@@ -386,16 +389,17 @@ body.is-open .letter {
   aspect-ratio: 1 / 1;
 }
 
+/* ========== Música ========== */
 .music {
   position: fixed;
-  bottom: 22px;
-  right: 22px;
-  width: 42px;
-  height: 42px;
+  bottom: 20px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 200, 210, 0.18);
-  background: rgba(30, 16, 24, 0.75);
-  color: rgba(255, 210, 220, 0.8);
+  background: rgba(30, 16, 24, 0.8);
+  color: rgba(255, 210, 220, 0.85);
   font-size: 1.05rem;
   cursor: pointer;
   z-index: 100;
@@ -404,6 +408,7 @@ body.is-open .letter {
   justify-content: center;
   backdrop-filter: blur(8px);
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .music:hover {
@@ -417,19 +422,87 @@ body.is-open .letter {
   border-color: rgba(255, 150, 170, 0.3);
 }
 
-@media (max-width: 480px) {
-  .card { width: 280px; }
-  .card-face { padding: 46px 32px 36px; }
-  .card-name { font-size: 2.2rem; }
-  .letter { width: 340px; }
-  .letter-sheet { padding: 34px 28px 30px; }
-  .letter-title { font-size: 2rem; }
-  .letter-text { font-size: 1rem; }
-  .secret-photo { max-width: 220px; }
+/* ========== MÓVIL — carta ancha y legible ========== */
+@media (max-width: 600px) {
+  body.is-open {
+    padding: 20px 12px 100px;
+  }
+
+  .stage {
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .card {
+    width: min(300px, 88vw);
+  }
+
+  .card-face {
+    padding: 44px 28px 36px;
+  }
+
+  .card-name {
+    font-size: 2.25rem;
+  }
+
+  .letter,
+  body.is-open .letter {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .letter-sheet {
+    padding: 32px 22px 28px;
+    border-radius: 10px;
+  }
+
+  .letter-title {
+    font-size: 2.1rem;
+  }
+
+  .letter-sub {
+    font-size: 0.95rem;
+  }
+
+  .letter-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .letter-text p {
+    margin-bottom: 16px;
+  }
+
+  .letter-end {
+    font-size: 1.08rem;
+  }
+
+  .foot-name {
+    font-size: 1.4rem;
+  }
+
+  .secret-photo {
+    max-width: 85%;
+  }
+
+  .music {
+    bottom: 16px;
+    right: 14px;
+    width: 46px;
+    height: 46px;
+  }
 }
 
-@media (max-height: 700px) {
-  .letter-sheet { padding: 30px 28px 26px; }
-  .letter-title { font-size: 1.95rem; }
-  .letter-text p { margin-bottom: 10px; }
+@media (max-width: 380px) {
+  .letter-sheet {
+    padding: 28px 18px 24px;
+  }
+
+  .letter-title {
+    font-size: 1.95rem;
+  }
+
+  .letter-text {
+    font-size: 1.02rem;
+  }
 }
