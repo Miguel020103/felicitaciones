@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Una carta especial, hecha con cariño" />
-  <title>Para ti ❤️</title>
+  <meta name="description" content="Una carta hecha con cariño, solo para ti" />
+  <title>Para ti</title>
 
-  <meta property="og:title" content="Para ti, con todo mi amor" />
-  <meta property="og:description" content="Toca para abrir tu carta" />
+  <meta property="og:title" content="Para ti" />
+  <meta property="og:description" content="Toca para leer tu carta" />
   <meta property="og:image" content="preview.jpg" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Para ti, con todo mi amor" />
-  <meta name="twitter:description" content="Toca para abrir tu carta" />
+  <meta name="twitter:title" content="Para ti" />
+  <meta name="twitter:description" content="Toca para leer tu carta" />
   <meta name="twitter:image" content="preview.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,48 +22,32 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg"></div>
-  <div class="petals" id="petals"></div>
+  <div class="ambient"></div>
+  <div class="dust" id="dust"></div>
 
-  <main class="stage" id="stage">
-    <!-- SOBRE -->
-    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Abrir carta">
-      <div class="envelope-body">
-        <div class="paper-grain"></div>
-
-        <div class="label">
-          <p class="label-to">Para</p>
-          <p class="label-name">Mi amor</p>
-          <p class="label-from">con todo el cariño del mundo</p>
-        </div>
-
-        <div class="seal" aria-hidden="true">
-          <span>♥</span>
-        </div>
+  <main class="stage">
+    <!-- Tarjeta cerrada -->
+    <button class="card" id="card" type="button" aria-label="Abrir carta">
+      <div class="card-face">
+        <div class="grain"></div>
+        <p class="card-for">Para</p>
+        <p class="card-name">Mi amor</p>
+        <div class="card-seal"><span>♥</span></div>
+        <p class="card-hint">Toca para leer</p>
       </div>
+    </button>
 
-      <div class="flap" id="flap">
-        <div class="flap-face"></div>
-      </div>
-
-      <p class="hint" id="hint">Toca para abrir</p>
-    </div>
-
-    <!-- CARTA -->
+    <!-- Carta abierta -->
     <article class="letter" id="letter" aria-hidden="true">
-      <div class="letter-inner">
-        <div class="letter-grain"></div>
+      <div class="letter-sheet">
+        <div class="grain"></div>
 
-        <header class="letter-top">
-          <span class="ornament">✦</span>
-        </header>
-
+        <p class="letter-mark">✦</p>
         <h1 class="letter-title">Feliz cumpleaños</h1>
-        <p class="letter-lead">mi persona favorita</p>
+        <p class="letter-sub">mi persona favorita</p>
+        <div class="letter-line"></div>
 
-        <div class="rule"></div>
-
-        <div class="letter-body">
+        <div class="letter-text">
           <p>
             Hoy es un día especial porque naciste tú.
             Desde que llegaste a mi vida, todo se siente
@@ -73,15 +57,15 @@
             Aunque estemos lejos, mi corazón
             siempre encuentra el camino hacia ti.
           </p>
-          <p class="letter-close">
+          <p class="letter-end">
             Te quiero mucho.<br />
             Feliz cumpleaños, mi amor.
           </p>
         </div>
 
-        <footer class="letter-sign">
-          <p class="sign-line">Con mucho amor,</p>
-          <p class="sign-name">Tu persona</p>
+        <footer class="letter-foot">
+          <p class="foot-from">Con mucho amor,</p>
+          <p class="foot-name">Tu persona</p>
         </footer>
       </div>
     </article>
