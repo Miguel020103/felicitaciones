@@ -17,16 +17,13 @@ function openEnvelope() {
   if (isOpen) return;
   isOpen = true;
 
-  // Abrir solapa
-  envelope.classList.add('opened');
+  // 1. Primero voltear el sobre
+  envelope.classList.add('flipping');
   if (hint) hint.style.opacity = '0';
 
-  // Después de la animación de la solapa, mostrar la carta
+  // 2. Después de que se voltea, mostrar la carta
   setTimeout(() => {
-    // Subir y desvanecer el sobre
-    envelope.style.transition = 'all 0.9s ease';
-    envelope.style.transform = 'translateY(40px) scale(0.85)';
-    envelope.style.opacity = '0';
+    envelope.classList.add('opened');
 
     // Mostrar carta
     letter.classList.add('visible');
@@ -36,15 +33,13 @@ function openEnvelope() {
 
     // Música automática
     tryPlayMusic();
-  }, 950);
+  }, 900);
 }
 
 // ===================== EFECTOS CINEMATOGRÁFICOS =====================
 function launchCinematicEffects() {
-  // Primera lluvia de pétalos
   createPetalRain(50);
 
-  // Rosas grandes en diferentes posiciones
   const positions = [
     [12, 18], [78, 22], [45, 12],
     [88, 55], [8, 60], [65, 70],
@@ -55,12 +50,10 @@ function launchCinematicEffects() {
     setTimeout(() => createBigRose(x, y), 180 + i * 220);
   });
 
-  // Brillos
   for (let i = 0; i < 25; i++) {
     setTimeout(() => createSparkle(), i * 120);
   }
 
-  // Más pétalos a lo largo del tiempo
   setTimeout(() => createPetalRain(35), 2800);
   setTimeout(() => createPetalRain(30), 5500);
   setTimeout(() => createPetalRain(20), 8500);
@@ -87,7 +80,6 @@ function createPetalRain(count) {
 
       petalsContainer.appendChild(petal);
 
-      // Limpiar
       setTimeout(() => petal.remove(), (duration + 0.5) * 1000);
     }, i * 70);
   }
@@ -117,7 +109,7 @@ function createSparkle() {
 
 // ===================== MÚSICA =====================
 function tryPlayMusic() {
-  bgMusic.volume = 0.45; // Volumen suave (cámbialo si quieres más alto o más bajo)
+  bgMusic.volume = 0.45;
 
   const playPromise = bgMusic.play();
 
@@ -134,7 +126,6 @@ function tryPlayMusic() {
   }
 }
 
-// Botón solo para pausar / reanudar
 musicBtn.addEventListener('click', () => {
   if (musicPlaying) {
     bgMusic.pause();
@@ -167,7 +158,6 @@ setInterval(() => {
   }
 }, 1400);
 
-// Evitar que el scroll del body interfiera en móviles
 document.body.addEventListener('touchmove', (e) => {
   if (isOpen) return;
 }, { passive: true });
