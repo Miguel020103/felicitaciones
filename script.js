@@ -28,6 +28,9 @@ function openEnvelope() {
     // Mostrar carta
     letter.classList.add('visible');
 
+    // Permitir scroll y adaptar layout para ver el texto completo
+    document.body.classList.add('letter-open');
+
     // Efectos cinematográficos
     launchCinematicEffects();
 
