@@ -1,7 +1,7 @@
 *, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 :root {
@@ -11,50 +11,45 @@
   --rose: #9e1b48;
   --rose-deep: #6f1232;
   --gold: #b8976e;
-  --card-w: 300px;
+  --surface: #f7f0e9;
+  --card: #f3e9e0;
 }
 
-html, body {
+html {
   height: 100%;
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100%;
   min-height: 100dvh;
   background: var(--bg);
   color: var(--ink);
   font-family: 'Cormorant Garamond', Georgia, serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body.is-open {
   overflow-y: auto;
-  overflow-x: hidden;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 32px 16px 100px;
 }
 
 .ambient {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 45%, rgba(90, 30, 55, 0.2), transparent 65%),
-    var(--bg);
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 40%, rgba(90, 30, 55, 0.22), transparent 70%),
+    var(--bg);
 }
 
 .dust {
   position: fixed;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
-  z-index: 5;
   overflow: hidden;
 }
 
@@ -68,70 +63,62 @@ body.is-open {
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  15% { opacity: 0.45; }
-  100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.5; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 .stage {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: var(--card-w);
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 280px;
-  margin: 0 auto;
+  padding: 24px 16px;
 }
 
 body.is-open .stage {
+  align-items: flex-start;
+  padding: 40px 16px 110px;
   min-height: auto;
-  max-width: var(--card-w);
-  width: 100%;
 }
 
 .card {
-  position: relative;
-  width: 100%;
-  max-width: var(--card-w);
+  width: min(340px, 100%);
   border: none;
   background: transparent;
   cursor: pointer;
   padding: 0;
+  transition: transform 0.45s ease, opacity 0.6s ease;
   z-index: 20;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease;
 }
 
 .card:hover:not(.hiding) {
   transform: translateY(-4px);
 }
 
-.card:focus-visible {
-  outline: 2px solid rgba(184, 151, 110, 0.45);
-  outline-offset: 10px;
-}
-
 .card.hiding {
   opacity: 0;
-  transform: scale(0.94) translateY(10px);
+  transform: scale(0.96);
   pointer-events: none;
+  position: absolute;
 }
 
 .card-face {
-  position: relative;
-  background: #f3e9e0;
-  border-radius: 8px;
-  padding: 52px 36px 40px;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 56px 40px 44px;
   text-align: center;
   box-shadow:
-    0 16px 36px rgba(0, 0, 0, 0.4),
-    0 4px 10px rgba(0, 0, 0, 0.2);
+    0 18px 40px rgba(0, 0, 0, 0.42),
+    0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .card-for {
-  font-size: 0.7rem;
-  letter-spacing: 0.32em;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #8a6a5c;
   margin-bottom: 10px;
@@ -139,16 +126,16 @@ body.is-open .stage {
 
 .card-name {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   color: var(--rose);
   line-height: 1;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .card-seal {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 24px;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 26px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 28%, #d04a68, #8f1838 60%, #5c0e24 100%);
   box-shadow:
@@ -162,8 +149,7 @@ body.is-open .stage {
 
 .card-seal span {
   color: #fff4f6;
-  font-size: 1.1rem;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 1.15rem;
 }
 
 .card-hint {
@@ -176,56 +162,45 @@ body.is-open .stage {
 
 @keyframes pulse {
   0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.75; }
+  50% { opacity: 0.8; }
 }
 
 .letter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  max-width: var(--card-w);
-  transform: translate(-50%, -50%) scale(0.94);
+  width: min(460px, 100%);
+  max-width: 460px;
+  margin: 0 auto;
   opacity: 0;
+  transform: scale(0.96) translateY(12px);
   pointer-events: none;
   z-index: 30;
   transition:
-    opacity 0.65s ease,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  visibility: hidden;
 }
 
 .letter.visible {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: scale(1) translateY(0);
   pointer-events: auto;
-}
-
-body.is-open .letter {
   position: relative;
-  top: auto;
-  left: auto;
-  transform: none;
-  margin: 0 auto;
-  width: 100%;
-  max-width: var(--card-w);
+  visibility: visible;
 }
 
 .letter-sheet {
-  position: relative;
-  background: #f7f0e9;
-  border-radius: 8px;
-  padding: 36px 28px 32px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 44px 40px 40px;
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.18);
+    0 20px 48px rgba(0, 0, 0, 0.4),
+    0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(12px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.show {
@@ -235,49 +210,48 @@ body.is-open .letter {
 
 .letter-mark {
   text-align: center;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--gold);
   letter-spacing: 0.35em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .letter-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.15rem;
+  font-size: 2.5rem;
   font-weight: 400;
   color: var(--rose);
   text-align: center;
   line-height: 1.15;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .letter-sub {
   font-family: 'IM Fell English', 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-style: italic;
   color: var(--ink-soft);
   text-align: center;
-  letter-spacing: 0.03em;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .letter-line {
-  width: 36px;
+  width: 40px;
   height: 1px;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .letter-text {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.12rem;
+  line-height: 1.75;
   color: var(--ink);
   text-align: center;
 }
 
 .letter-text p {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .letter-text p:last-child {
@@ -287,18 +261,17 @@ body.is-open .letter {
 .letter-end {
   font-family: 'IM Fell English', 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 1.06rem;
+  font-size: 1.12rem;
   color: var(--rose-deep);
-  margin-top: 2px !important;
 }
 
 .letter-foot {
-  margin-top: 20px;
+  margin-top: 24px;
   text-align: center;
 }
 
 .foot-from {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-style: italic;
   color: var(--ink-soft);
   margin-bottom: 4px;
@@ -306,12 +279,12 @@ body.is-open .letter {
 
 .foot-name {
   font-family: 'Great Vibes', cursive;
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   color: var(--rose);
 }
 
 .letter-close {
-  margin-top: 28px;
+  margin-top: 32px;
   text-align: center;
   cursor: pointer;
   user-select: none;
@@ -319,11 +292,10 @@ body.is-open .letter {
 
 .close-heart {
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   color: var(--rose);
-  line-height: 1;
-  transition: transform 0.35s ease, color 0.35s ease;
   animation: heartSoft 2.4s ease-in-out infinite;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 @keyframes heartSoft {
@@ -331,15 +303,14 @@ body.is-open .letter {
   50% { transform: scale(1.12); }
 }
 
-.letter-close:hover .close-heart,
-.letter-close:focus-visible .close-heart {
+.letter-close:hover .close-heart {
   transform: scale(1.2);
   color: var(--rose-deep);
 }
 
 .close-hint {
   margin-top: 8px;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(90, 60, 70, 0.45);
@@ -361,95 +332,114 @@ body.is-open .letter {
   opacity: 0;
   margin-top: 0;
   text-align: center;
-  transition:
-    max-height 1s ease,
-    opacity 0.7s ease 0.1s,
-    margin-top 0.5s ease;
+  transition: max-height 1s ease, opacity 0.7s ease 0.1s, margin-top 0.5s ease;
 }
 
 .secret.show {
-  max-height: 520px;
+  max-height: 560px;
   opacity: 1;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .secret-text {
   font-family: 'IM Fell English', 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 1.02rem;
-  line-height: 1.6;
+  font-size: 1.08rem;
+  line-height: 1.65;
   color: var(--rose-deep);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .secret-photo {
   margin: 0 auto;
-  max-width: 220px;
+  max-width: 280px;
 }
 
 .secret-photo img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 6px;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(180, 140, 110, 0.15);
+  border-radius: 8px;
   object-fit: cover;
   aspect-ratio: 1 / 1;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 .music {
   position: fixed;
   bottom: 20px;
-  right: 16px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 200, 210, 0.18);
-  background: rgba(30, 16, 24, 0.8);
-  color: rgba(255, 210, 220, 0.85);
-  font-size: 1.05rem;
-  cursor: pointer;
+  right: 18px;
   z-index: 100;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 200, 210, 0.2);
+  background: rgba(30, 16, 24, 0.85);
+  color: rgba(255, 210, 220, 0.9);
+  font-size: 1.1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
   -webkit-tap-highlight-color: transparent;
-}
-
-.music:hover {
-  background: rgba(70, 28, 45, 0.9);
-  color: #fff;
-  transform: scale(1.06);
 }
 
 .music.on {
   color: #ffc0cb;
-  border-color: rgba(255, 150, 170, 0.3);
 }
 
-@media (max-width: 600px) {
-  :root {
-    --card-w: min(300px, calc(100vw - 32px));
+@media (max-width: 520px) {
+  .stage {
+    padding: 20px 14px;
   }
 
-  body.is-open {
-    padding: 24px 16px 100px;
+  body.is-open .stage {
+    padding: 28px 14px 110px;
+  }
+
+  .card {
+    width: min(320px, 100%);
   }
 
   .card-face {
-    padding: 44px 28px 36px;
+    padding: 48px 28px 40px;
   }
 
   .card-name {
-    font-size: 2.25rem;
+    font-size: 2.35rem;
+  }
+
+  .letter {
+    width: 100%;
+    max-width: 100%;
   }
 
   .letter-sheet {
-    padding: 32px 24px 28px;
+    padding: 36px 24px 32px;
+  }
+
+  .letter-title {
+    font-size: 2.25rem;
+  }
+
+  .letter-text {
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  .letter-text p {
+    margin-bottom: 16px;
+  }
+
+  .secret-photo {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 360px) {
+  .letter-sheet {
+    padding: 30px 18px 28px;
   }
 
   .letter-title {
@@ -457,36 +447,6 @@ body.is-open .letter {
   }
 
   .letter-text {
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-
-  .letter-text p {
-    margin-bottom: 15px;
-  }
-
-  .secret-photo {
-    max-width: 200px;
-  }
-
-  .music {
-    bottom: 16px;
-    right: 14px;
-    width: 46px;
-    height: 46px;
-  }
-}
-
-@media (max-width: 380px) {
-  .letter-sheet {
-    padding: 28px 20px 24px;
-  }
-
-  .letter-title {
-    font-size: 1.95rem;
-  }
-
-  .letter-text {
-    font-size: 1.02rem;
+    font-size: 1.04rem;
   }
 }
