@@ -17,11 +17,11 @@ function openEnvelope() {
   if (isOpen) return;
   isOpen = true;
 
-  // 1. Primero voltear el sobre
-  envelope.classList.add('flipping');
+  // 1. Elevar el sobre y abrir la solapa
+  envelope.classList.add('opening');
   if (hint) hint.style.opacity = '0';
 
-  // 2. Después de que se voltea, mostrar la carta
+  // 2. Después de abrir la solapa, esconder el sobre y mostrar la carta
   setTimeout(() => {
     envelope.classList.add('opened');
 
@@ -33,7 +33,7 @@ function openEnvelope() {
 
     // Música automática
     tryPlayMusic();
-  }, 900);
+  }, 1100);
 }
 
 // ===================== EFECTOS CINEMATOGRÁFICOS =====================
