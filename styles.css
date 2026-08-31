@@ -11,6 +11,7 @@
   --rose: #9e1b48;
   --rose-deep: #6f1232;
   --gold: #b8976e;
+  --card-w: 300px;
 }
 
 html, body {
@@ -35,7 +36,8 @@ body.is-open {
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-start;
-  padding: 28px 16px 96px;
+  justify-content: center;
+  padding: 32px 16px 100px;
 }
 
 .ambient {
@@ -75,17 +77,24 @@ body.is-open {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 480px;
+  max-width: var(--card-w);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 280px;
+  margin: 0 auto;
 }
 
-/* ========== Tarjeta cerrada ========== */
+body.is-open .stage {
+  min-height: auto;
+  max-width: var(--card-w);
+  width: 100%;
+}
+
 .card {
   position: relative;
-  width: min(300px, 86vw);
+  width: 100%;
+  max-width: var(--card-w);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -113,7 +122,7 @@ body.is-open {
   position: relative;
   background: #f3e9e0;
   border-radius: 8px;
-  padding: 52px 40px 40px;
+  padding: 52px 36px 40px;
   text-align: center;
   box-shadow:
     0 16px 36px rgba(0, 0, 0, 0.4),
@@ -170,13 +179,13 @@ body.is-open {
   50% { opacity: 0.75; }
 }
 
-/* ========== Carta abierta ========== */
 .letter {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(400px, 92vw);
-  transform: translate(-50%, -50%) scale(0.9);
+  width: 100%;
+  max-width: var(--card-w);
+  transform: translate(-50%, -50%) scale(0.94);
   opacity: 0;
   pointer-events: none;
   z-index: 30;
@@ -197,14 +206,15 @@ body.is-open .letter {
   left: auto;
   transform: none;
   margin: 0 auto;
-  width: min(400px, 100%);
+  width: 100%;
+  max-width: var(--card-w);
 }
 
 .letter-sheet {
   position: relative;
   background: #f7f0e9;
   border-radius: 8px;
-  padding: 40px 44px 36px;
+  padding: 36px 28px 32px;
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.4),
     0 4px 12px rgba(0, 0, 0, 0.18);
@@ -233,7 +243,7 @@ body.is-open .letter {
 
 .letter-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.25rem;
+  font-size: 2.15rem;
   font-weight: 400;
   color: var(--rose);
   text-align: center;
@@ -261,7 +271,7 @@ body.is-open .letter {
 
 .letter-text {
   font-size: 1.05rem;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--ink);
   text-align: center;
 }
@@ -374,7 +384,7 @@ body.is-open .letter {
 
 .secret-photo {
   margin: 0 auto;
-  max-width: 260px;
+  max-width: 220px;
 }
 
 .secret-photo img {
@@ -389,7 +399,6 @@ body.is-open .letter {
   aspect-ratio: 1 / 1;
 }
 
-/* ========== Música ========== */
 .music {
   position: fixed;
   bottom: 20px;
@@ -422,19 +431,13 @@ body.is-open .letter {
   border-color: rgba(255, 150, 170, 0.3);
 }
 
-/* ========== MÓVIL — carta ancha y legible ========== */
 @media (max-width: 600px) {
+  :root {
+    --card-w: min(300px, calc(100vw - 32px));
+  }
+
   body.is-open {
-    padding: 20px 12px 100px;
-  }
-
-  .stage {
-    max-width: 100%;
-    min-height: auto;
-  }
-
-  .card {
-    width: min(300px, 88vw);
+    padding: 24px 16px 100px;
   }
 
   .card-face {
@@ -445,23 +448,12 @@ body.is-open .letter {
     font-size: 2.25rem;
   }
 
-  .letter,
-  body.is-open .letter {
-    width: 100%;
-    max-width: 100%;
-  }
-
   .letter-sheet {
-    padding: 32px 22px 28px;
-    border-radius: 10px;
+    padding: 32px 24px 28px;
   }
 
   .letter-title {
-    font-size: 2.1rem;
-  }
-
-  .letter-sub {
-    font-size: 0.95rem;
+    font-size: 2.05rem;
   }
 
   .letter-text {
@@ -470,19 +462,11 @@ body.is-open .letter {
   }
 
   .letter-text p {
-    margin-bottom: 16px;
-  }
-
-  .letter-end {
-    font-size: 1.08rem;
-  }
-
-  .foot-name {
-    font-size: 1.4rem;
+    margin-bottom: 15px;
   }
 
   .secret-photo {
-    max-width: 85%;
+    max-width: 200px;
   }
 
   .music {
@@ -495,7 +479,7 @@ body.is-open .letter {
 
 @media (max-width: 380px) {
   .letter-sheet {
-    padding: 28px 18px 24px;
+    padding: 28px 20px 24px;
   }
 
   .letter-title {
