@@ -207,13 +207,25 @@ body.is-open .letter {
     0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .letter-mark {
   text-align: center;
   font-size: 0.65rem;
   color: var(--gold);
   letter-spacing: 0.35em;
   margin-bottom: 10px;
-  opacity: 0.8;
 }
 
 .letter-title {
@@ -285,6 +297,95 @@ body.is-open .letter {
   color: var(--rose);
 }
 
+.letter-close {
+  margin-top: 28px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.close-heart {
+  display: inline-block;
+  font-size: 1.6rem;
+  color: var(--rose);
+  line-height: 1;
+  transition: transform 0.35s ease, color 0.35s ease;
+  animation: heartSoft 2.4s ease-in-out infinite;
+}
+
+@keyframes heartSoft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.letter-close:hover .close-heart,
+.letter-close:focus-visible .close-heart {
+  transform: scale(1.2);
+  color: var(--rose-deep);
+}
+
+.close-hint {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(90, 60, 70, 0.45);
+  transition: opacity 0.4s ease;
+}
+
+.letter-close.opened .close-hint {
+  opacity: 0;
+}
+
+.letter-close.opened .close-heart {
+  animation: none;
+  color: var(--rose-deep);
+}
+
+.secret {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  text-align: center;
+  transition:
+    max-height 1s ease,
+    opacity 0.7s ease 0.1s,
+    margin-top 0.5s ease;
+}
+
+.secret.show {
+  max-height: 480px;
+  opacity: 1;
+  margin-top: 18px;
+}
+
+.secret-text {
+  font-family: 'IM Fell English', 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--rose-deep);
+  margin-bottom: 18px;
+}
+
+.secret-photo {
+  margin: 0 auto;
+  max-width: 260px;
+}
+
+.secret-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(180, 140, 110, 0.15);
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
 .music {
   position: fixed;
   bottom: 22px;
@@ -324,6 +425,7 @@ body.is-open .letter {
   .letter-sheet { padding: 34px 28px 30px; }
   .letter-title { font-size: 2rem; }
   .letter-text { font-size: 1rem; }
+  .secret-photo { max-width: 220px; }
 }
 
 @media (max-height: 700px) {
