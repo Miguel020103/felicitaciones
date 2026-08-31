@@ -9,10 +9,7 @@
   --rose: #c41e5a;
   --rose-light: #ff6b9d;
   --rose-dark: #8b1e3f;
-  --paper: #fff8f5;
-  --paper-shadow: #f0e0dc;
   --ink: #4a1c2e;
-  --gold: #d4a373;
 }
 
 html, body {
@@ -30,18 +27,15 @@ body {
   color: var(--ink);
   position: relative;
   -webkit-font-smoothing: antialiased;
-  transition: overflow 0.3s ease;
 }
 
-/* Cuando la carta está abierta permitimos scroll para ver el texto completo */
 body.letter-open {
   overflow-y: auto;
   overflow-x: hidden;
   align-items: flex-start;
-  padding: 40px 16px 80px;
+  padding: 32px 16px 80px;
 }
 
-/* Fondo con brillos suaves */
 .bg-glow {
   position: fixed;
   inset: 0;
@@ -60,87 +54,79 @@ body.letter-open {
   width: 100%;
   max-width: 440px;
   height: 340px;
-  perspective: 1400px;
+  perspective: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: height 0.8s ease;
 }
 
-/* Cuando la carta está abierta, la escena se adapta al contenido */
 body.letter-open .scene {
   height: auto;
-  min-height: 100vh;
-  align-items: flex-start;
-  padding-top: 20px;
+  min-height: auto;
+  padding-top: 10px;
   perspective: none;
 }
 
 /* ===================== SOBRE ===================== */
 .envelope {
-  position: relative;
+  position: absolute;
   width: 340px;
   height: 230px;
   cursor: pointer;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.6s ease;
+  transition: transform 0.55s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.7s ease;
   z-index: 20;
 }
 
-.envelope:hover:not(.opened) {
-  transform: translateY(-8px) scale(1.03);
+.envelope:hover:not(.opening):not(.opened) {
+  transform: translateY(-6px) scale(1.02);
 }
 
-/* Cuando se está abriendo */
+/* Fase 1: se eleva un poco al empezar */
 .envelope.opening {
-  transform: translateY(-20px) scale(1.05);
+  transform: translateY(-12px);
   pointer-events: none;
 }
 
-/* Cuando ya se abrió y se esconde */
+/* Fase final: se esconde hacia abajo */
 .envelope.opened {
   opacity: 0;
-  transform: translateY(40px) scale(0.8);
+  transform: translateY(60px) scale(0.85);
   pointer-events: none;
-  transition: all 0.9s ease;
-  z-index: 1; /* Muy por debajo de la carta */
+  z-index: 1;
+  transition: opacity 0.7s ease 0.15s, transform 0.8s ease 0.1s;
 }
 
-/* Cara frontal del sobre */
 .envelope-front {
   position: absolute;
   inset: 0;
   background: linear-gradient(160deg, #f7e8e0 0%, #f0d9cc 45%, #e8cfc0 100%);
   border-radius: 6px;
   box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.45),
-    0 10px 20px rgba(0, 0, 0, 0.25),
+    0 22px 45px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.35);
   overflow: hidden;
   z-index: 2;
-  backface-visibility: hidden;
 }
 
-/* Textura sutil de papel */
 .envelope-texture {
   position: absolute;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.015) 2px,
-      rgba(0, 0, 0, 0.015) 4px
-    );
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.015) 2px,
+    rgba(0, 0, 0, 0.015) 4px
+  );
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* Dirección */
 .address {
   position: absolute;
-  top: 48%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -150,7 +136,7 @@ body.letter-open .scene {
 
 .to-label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #8a5a4a;
@@ -161,88 +147,29 @@ body.letter-open .scene {
 .to-name {
   display: block;
   font-family: 'Great Vibes', cursive;
-  font-size: 2.4rem;
+  font-size: 2.35rem;
   color: var(--rose);
   line-height: 1.1;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-shadow: 0 1px 2px rgba(196, 30, 90, 0.15);
 }
 
 .from-label {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-style: italic;
   color: #7a4a3a;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
-/* Esquinas decorativas sutiles */
-.corner {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid rgba(196, 30, 90, 0.25);
-  z-index: 3;
-}
-.corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
-.corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
-.corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
-.corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
-
-/* ===================== SOLAPA (con sello dentro) ===================== */
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 125px;
-  z-index: 15; /* Por encima del frente cuando está cerrado */
-  transform-origin: top center;
-  transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
-  pointer-events: none;
-  backface-visibility: hidden;
-}
-
-/* Solapa abierta: se voltea hacia atrás */
-.envelope.opening .envelope-flap,
-.envelope.opened .envelope-flap {
-  transform: rotateX(180deg);
-  z-index: 1; /* Detrás de todo al abrir */
-}
-
-.flap-inner {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(175deg, #f5dfd2 0%, #ebc9b8 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  position: relative;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.flap-inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    transparent 40%
-  );
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-
-/* Sello de cera — hermano del triángulo, voltea con la solapa */
+/* Sello abajo */
 .wax-seal {
   position: absolute;
-  /* Cerca de la punta del triángulo, donde el triángulo aún es ancho */
-  bottom: 28px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   background: radial-gradient(circle at 35% 30%, #e84a6f, #9c1c3d 70%);
   border-radius: 50%;
   box-shadow:
@@ -252,160 +179,223 @@ body.letter-open .scene {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
-  transition: transform 0.4s ease;
-  pointer-events: none;
+  z-index: 4;
+  transition: transform 0.35s ease;
 }
 
-.envelope:hover:not(.opened) .wax-seal {
+.envelope:hover:not(.opening):not(.opened) .wax-seal {
   transform: translateX(-50%) scale(1.08);
 }
 
 .seal-inner {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(196, 30, 90, 0.22);
+  z-index: 3;
+}
+.corner-tl { top: 11px; left: 11px; border-right: none; border-bottom: none; }
+.corner-tr { top: 11px; right: 11px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 11px; left: 11px; border-right: none; border-top: none; }
+.corner-br { bottom: 11px; right: 11px; border-left: none; border-top: none; }
+
+/* ===================== SOLAPA ===================== */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  z-index: 12;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+.envelope.opening .envelope-flap,
+.envelope.opened .envelope-flap {
+  transform: rotateX(175deg);
+}
+
+.flap-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(175deg, #f5dfd2 0%, #e8c4b0 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  position: relative;
+  backface-visibility: hidden;
+}
+
+.flap-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, transparent 45%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 /* Hint */
 .click-hint {
   position: absolute;
-  bottom: -55px;
+  bottom: -52px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   color: #ffb6c1;
-  font-size: 1rem;
-  letter-spacing: 1.5px;
+  font-size: 0.95rem;
+  letter-spacing: 1.4px;
   white-space: nowrap;
   animation: hintPulse 2.2s ease-in-out infinite;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.45s ease;
   z-index: 5;
 }
 
 .hint-arrow {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 2px;
   opacity: 0.8;
 }
 
 @keyframes hintPulse {
-  0%, 100% { opacity: 0.55; transform: translateX(-50%) translateY(0); }
-  50% { opacity: 1; transform: translateX(-50%) translateY(4px); }
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(3px); }
 }
 
-.envelope.opened .click-hint,
-.envelope.opening .click-hint {
+.envelope.opening .click-hint,
+.envelope.opened .click-hint {
   opacity: 0;
   pointer-events: none;
 }
 
 /* ===================== CARTA ===================== */
+/* Empieza DENTRO del sobre (más abajo y pequeña) */
 .letter {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 320px;
-  max-width: 92vw;
-  transform: translate(-50%, -40%) scale(0.55);
+  width: 300px;
+  max-width: 90vw;
+  transform: translate(-50%, -20%) scale(0.72);
   opacity: 0;
   pointer-events: none;
-  z-index: 50; /* Siempre por encima del sobre y la solapa */
-  transition: all 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 8;
+  transition:
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
 }
 
+/* Sale del sobre hacia arriba y se agranda */
+.letter.pulling {
+  opacity: 1;
+  transform: translate(-50%, -58%) scale(0.92);
+  z-index: 25;
+  transition:
+    transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+/* Posición final centrada y elegante */
 .letter.visible {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
+  z-index: 50;
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
 }
 
-/* Cuando el body ya tiene letter-open, la carta se posiciona de forma natural */
 body.letter-open .letter {
   position: relative;
   top: auto;
   left: auto;
   transform: none;
   margin: 0 auto;
-  max-height: none;
 }
 
 .letter-paper {
-  background: linear-gradient(165deg, #fff9f6 0%, #fff2ec 50%, #ffece3 100%);
+  background: linear-gradient(165deg, #fff9f6 0%, #fff2ec 55%, #ffece3 100%);
   border-radius: 4px;
-  padding: 36px 28px 28px;
+  padding: 28px 26px 22px;
   box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(212, 163, 115, 0.2),
-    0 0 40px rgba(255, 105, 180, 0.12);
+    0 28px 55px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(212, 163, 115, 0.18),
+    0 0 35px rgba(255, 105, 180, 0.1);
   position: relative;
-  overflow: visible; /* Permite ver todo el texto */
-  max-height: none;
 }
 
-/* Borde superior dorado-rosado */
 .letter-paper::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 4px;
   background: linear-gradient(90deg, var(--rose-dark), var(--rose-light), var(--rose-dark));
+  border-radius: 4px 4px 0 0;
 }
 
 .letter-header {
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
 .rose-top {
-  font-size: 2.2rem;
+  font-size: 1.85rem;
   display: inline-block;
   animation: floatRose 3.2s ease-in-out infinite;
 }
 
 @keyframes floatRose {
-  0%, 100% { transform: translateY(0) rotate(-6deg); }
-  50% { transform: translateY(-7px) rotate(6deg); }
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-5px) rotate(5deg); }
 }
 
 .title {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.6rem;
+  font-size: 2.35rem;
   color: var(--rose);
   text-align: center;
-  line-height: 1.15;
-  margin-bottom: 2px;
-  text-shadow: 0 2px 4px rgba(196, 30, 90, 0.12);
+  line-height: 1.1;
+  margin-bottom: 0;
+  text-shadow: 0 2px 4px rgba(196, 30, 90, 0.1);
 }
 
 .subtitle {
   font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-style: italic;
   color: #8b4a5c;
   text-align: center;
-  letter-spacing: 1px;
-  margin-bottom: 14px;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
 }
 
 .divider {
   text-align: center;
   color: var(--rose-light);
-  font-size: 0.9rem;
-  margin-bottom: 18px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
   opacity: 0.7;
 }
 
 .message {
-  font-size: 1.08rem;
-  line-height: 1.65;
+  font-size: 1.02rem;
+  line-height: 1.55;
   color: #5a2e3e;
   text-align: center;
 }
 
 .message p {
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 }
 
 .message .highlight {
@@ -413,13 +403,13 @@ body.letter-open .letter {
   font-style: italic;
   font-weight: 600;
   color: var(--rose);
-  font-size: 1.15rem;
-  margin-top: 6px;
+  font-size: 1.08rem;
+  margin-top: 4px;
   margin-bottom: 0;
 }
 
 .signature {
-  margin-top: 22px;
+  margin-top: 16px;
   text-align: center;
 }
 
@@ -428,24 +418,24 @@ body.letter-open .letter {
 }
 
 .signature span:first-child {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #7a4a5a;
   font-style: italic;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .sign-name {
   font-family: 'Great Vibes', cursive;
-  font-size: 1.7rem;
+  font-size: 1.55rem;
   color: var(--rose);
 }
 
 .letter-footer {
   display: flex;
   justify-content: center;
-  gap: 14px;
-  margin-top: 18px;
-  font-size: 1.2rem;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: 1.1rem;
 }
 
 .letter-footer span {
@@ -456,7 +446,7 @@ body.letter-open .letter {
 
 @keyframes heartBeat {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.22); }
+  50% { transform: scale(1.2); }
 }
 
 /* ===================== PÉTALOS ===================== */
@@ -471,7 +461,7 @@ body.letter-open .letter {
 .petal {
   position: absolute;
   top: -50px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   opacity: 0.9;
   animation: fall linear forwards;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
@@ -485,40 +475,27 @@ body.letter-open .letter {
   }
   100% {
     transform: translateY(110vh) rotate(720deg) translateX(var(--drift, 40px));
-    opacity: 0.15;
+    opacity: 0.12;
   }
 }
 
-/* Rosas grandes */
 .big-rose {
   position: fixed;
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   opacity: 0;
   z-index: 40;
   pointer-events: none;
-  animation: bloom 2.6s ease-out forwards;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  animation: bloom 2.4s ease-out forwards;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes bloom {
-  0% {
-    opacity: 0;
-    transform: scale(0.15) rotate(-40deg);
-  }
-  35% {
-    opacity: 1;
-    transform: scale(1.2) rotate(12deg);
-  }
-  65% {
-    transform: scale(1) rotate(-6deg);
-  }
-  100% {
-    opacity: 0.65;
-    transform: scale(0.92) rotate(0deg);
-  }
+  0% { opacity: 0; transform: scale(0.15) rotate(-35deg); }
+  35% { opacity: 1; transform: scale(1.15) rotate(10deg); }
+  65% { transform: scale(1) rotate(-5deg); }
+  100% { opacity: 0.6; transform: scale(0.9) rotate(0deg); }
 }
 
-/* Brillos */
 .sparkle {
   position: fixed;
   width: 5px;
@@ -527,39 +504,30 @@ body.letter-open .letter {
   border-radius: 50%;
   pointer-events: none;
   z-index: 45;
-  animation: sparkle 1.7s ease-out forwards;
-  box-shadow: 0 0 6px #ffb6c1, 0 0 14px #ff69b4;
+  animation: sparkle 1.6s ease-out forwards;
+  box-shadow: 0 0 6px #ffb6c1, 0 0 12px #ff69b4;
 }
 
 @keyframes sparkle {
-  0% {
-    opacity: 1;
-    transform: scale(0) translateY(0);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1.3) translateY(-25px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0) translateY(-55px);
-  }
+  0% { opacity: 1; transform: scale(0) translateY(0); }
+  40% { opacity: 1; transform: scale(1.25) translateY(-22px); }
+  100% { opacity: 0; transform: scale(0) translateY(-50px); }
 }
 
-/* ===================== BOTÓN MÚSICA ===================== */
+/* ===================== MÚSICA ===================== */
 .music-btn {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
-  width: 52px;
-  height: 52px;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: linear-gradient(145deg, var(--rose-light), var(--rose));
   border: none;
   color: white;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(196, 30, 90, 0.4);
+  box-shadow: 0 8px 20px rgba(196, 30, 90, 0.4);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -568,8 +536,8 @@ body.letter-open .letter {
 }
 
 .music-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 28px rgba(196, 30, 90, 0.55);
+  transform: scale(1.08);
+  box-shadow: 0 10px 26px rgba(196, 30, 90, 0.5);
 }
 
 .music-btn.playing {
@@ -577,8 +545,8 @@ body.letter-open .letter {
 }
 
 @keyframes musicPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.45); }
-  50% { box-shadow: 0 0 0 14px rgba(255, 105, 180, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(255, 105, 180, 0); }
 }
 
 /* ===================== RESPONSIVE ===================== */
@@ -587,48 +555,17 @@ body.letter-open .letter {
     width: 300px;
     height: 205px;
   }
-
-  .to-name {
-    font-size: 2.1rem;
-  }
-
-  .letter {
-    width: 300px;
-  }
-
-  .title {
-    font-size: 2.2rem;
-  }
-
-  .message {
-    font-size: 1rem;
-  }
-
-  .letter-paper {
-    padding: 30px 22px 24px;
-  }
-
-  .click-hint {
-    font-size: 0.9rem;
-  }
-
-  .wax-seal {
-    width: 46px;
-    height: 46px;
-    bottom: 24px;
-  }
+  .to-name { font-size: 2.05rem; }
+  .letter { width: 280px; }
+  .title { font-size: 2.1rem; }
+  .message { font-size: 0.96rem; }
+  .letter-paper { padding: 24px 20px 18px; }
+  .click-hint { font-size: 0.88rem; }
+  .wax-seal { width: 44px; height: 44px; bottom: 16px; }
 }
 
 @media (max-height: 700px) {
-  .letter-paper {
-    padding: 24px 22px 20px;
-  }
-
-  .title {
-    font-size: 2.1rem;
-  }
-
-  .message p {
-    margin-bottom: 10px;
-  }
+  .letter-paper { padding: 22px 20px 16px; }
+  .title { font-size: 2rem; }
+  .message p { margin-bottom: 9px; }
 }
